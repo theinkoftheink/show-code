@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="../js/react.development.js" crossorigin></script>
+    <script src="../js/react-dom.development.js" crossorigin></script>
+
+    <script src="../js/babel.min.js"></script>
+
+    <div id="test"></div>
+    <!-- 此处写 text/babel -->
+
+    <script type="text/babel">
+      class Weather extends React.Component {
+        constructor(props){
+          super(props)
+          this.state = {
+            isHot: false
+          }
+        }
+        // render 方法放在哪里？ 放在 Weather 实例对象的原型上
+        // this 指向哪里？ Weather 的实例对象 === Weather 组件实例对象
+        render(){
+          console.log(this);
+          return <h2 onClick={this.changeWeather}>今天天气很{this.state.isHot ? '炎热':'凉爽'}</h2>
+        }
+
+        changeWeather () {
+          // changeWeather 放哪里？ Weather 的原型对象上，供实例使用
+          // 由于changeWeather 是作为onClick 的回调，所以不是通过实例调用的，是直接调用
+          // 类中的方法默认开启了局部严格模式，所以changeWeather 中的this 为undefined
+          console.log(this);
+        }
+      }
+
+      ReactDOM.render(<Weather />, document.getElementById("test"));
+
+      /**
+       * 1、react 解析标签，找到 Weather
+       * 2、发现组件是使用类定义的，随后new 出该类的实例，并通过该实例调用原型上的render 方法
+       * 3、将render返回的虚拟DOM转为真实DOM，随后呈现在页面中
+       * 
+      */
+    </script>
+  </body>
+</html>
