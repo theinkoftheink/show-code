@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [1, 2, 3, 4, 5];
+      let arr2 = [6, 7, 8, 9];
+      // 展开一个数组
+      console.log(...arr);
+      // 合并数组
+      console.log([...arr, ...arr2]);
+      // 在函数中使用
+      function sum(...nums) {
+        return nums.reduce((pre, cur) => {
+          return pre + cur;
+        });
+      }
+      console.log(sum(1,2,3));
+
+      // 构造字面量对象使用
+      let p1 = {name: 'TOM', age: 19}
+      let p2 = {...p1}
+
+      console.log(p2);
+      // 合并
+      let p3 = {...p1, age: 20, addr: '地球'}
+      console.log(p3);
+    </script>
+  </body>
+</html>

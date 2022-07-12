@@ -22,12 +22,14 @@
           this.state = {
             isHot: false
           }
+          // 解决changeWeather 上的this指向问题
+          this.changeWeather123 = this.changeWeather.bind(this)
         }
         // render 方法放在哪里？ 放在 Weather 实例对象的原型上
         // this 指向哪里？ Weather 的实例对象 === Weather 组件实例对象
         render(){
           console.log(this);
-          return <h2 onClick={this.changeWeather}>今天天气很{this.state.isHot ? '炎热':'凉爽'}</h2>
+          return <h2 onClick={this.changeWeather123}>今天天气很{this.state.isHot ? '炎热':'凉爽'}</h2>
         }
 
         changeWeather () {
@@ -35,6 +37,7 @@
           // 由于changeWeather 是作为onClick 的回调，所以不是通过实例调用的，是直接调用
           // 类中的方法默认开启了局部严格模式，所以changeWeather 中的this 为undefined
           console.log(this);
+          
         }
       }
 

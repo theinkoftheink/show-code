@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="../js/react.development.js" crossorigin></script>
+    <script src="../js/react-dom.development.js" crossorigin></script>
+
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+
+    <div id="test"></div>
+    <!-- 此处写 text/babel -->
+
+    <script type="text/babel">
+      class Person extends React.Component {
+        render() {
+          console.log(this);
+          const { name, age } = this.props;
+          return (
+            <ul>
+              <li>{name}</li>
+              <li>{age}</li>
+            </ul>
+          );
+        }
+      }
+
+      Person.propTypes = {
+        name: PropTypes.string.isRequired,
+        age: PropTypes.number,
+        spaek: PropTypes.func
+      }
+
+      Person.defaultProps = {
+        age: 100
+      }
+      let p = { name: '123', age: 19, speak: ()=>{} };
+      ReactDOM.render(<Person {...p} />, document.getElementById("test"));
+    </script>
+  </body>
+</html>
