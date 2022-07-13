@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="../js/react.development.js" crossorigin></script>
+    <script src="../js/react-dom.development.js" crossorigin></script>
+
+    <script src="../js/babel.min.js"></script>
+
+    <div id="test"></div>
+
+    <script type="text/babel">
+      class RefsC extends React.Component {
+        getInput1Value = () => {
+          const { input1 } = this;
+          console.log(input1.value);
+        };
+
+        getInput2Value = () => {
+          console.log(this);
+          const { input2 } = this;
+          console.log(input2.value);
+        };
+
+        render() {
+          return (
+            <div>
+              <input ref={c => console.log(c)} placeholder="input1" />
+              <button onClick={this.getInput1Value}>点击获取input1内容</button>
+              <input
+                onBlur={this.getInput2Value}
+                ref={c => this.input2 = c}
+                placeholder="input2 失去焦点获取值"
+              />
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<RefsC />, document.getElementById('test'))
+    </script>
+  </body>
+</html>
