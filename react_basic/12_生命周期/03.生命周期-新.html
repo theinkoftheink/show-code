@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="../js/17.0.1/react.development.js" crossorigin></script>
+    <script src="../js/17.0.1/react-dom.development.js" crossorigin></script>
+
+    <script src="../js/17.0.1/babel.min.js"></script>
+
+    <div id="test"></div>
+
+    <script type="text/babel">
+      class Life extends React.Component {
+        state = {
+          count: 1,
+        };
+
+        add = () => {
+          this.setState({
+            count: this.state.count + 1,
+          });
+        };
+
+        click = () => {
+          ReactDOM.unmountComponentAtNode(document.getElementById("test"));
+        };
+
+        static getDerivedStateFromProps(props, state){
+          console.log('getDerivedStateFromProps', props, state);
+          return null
+        }
+        
+        getSnapshotBeforeUpdate(){
+          console.log('getSnapshotBeforeUpdate');
+          return 'hhh'
+        }
+
+        componentDidUpdate(prevProps, prevState, snapshotValue){
+          console.log('componentDidUpdate', prevProps, prevState, snapshotValue);
+        }
+
+        render() {
+          return (
+            <div>
+              <h2>{this.state.count}</h2>
+              <button onClick={this.add}>+1</button>
+              <button onClick={this.click}>消失</button>
+            </div>
+          );
+        }
+      }
+      ReactDOM.render(<Life count ={100} />, document.getElementById("test"));
+    </script>
+  </body>
+</html>
